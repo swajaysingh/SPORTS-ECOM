@@ -1,0 +1,6 @@
+com\controller\AdminController.class
+com\controller\ProductController.class
+com\controller\SupplierController.class
+com\controller\UserController.class
+com\controller\CategoryController.class
+com\controller\HomeController.class
