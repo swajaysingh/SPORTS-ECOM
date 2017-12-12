@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,9 +45,8 @@ public class ProductController {
 	@Autowired
 	Supplier supplier;
 
-	
-	  /*@Autowired Product product;*/
-	 
+	/* @Autowired Product product; */
+
 	public LinkedHashMap<Integer, String> getCategories() {
 		List<Category> listCategories = categoryDao.retriveCategory();
 		LinkedHashMap<Integer, String> categoryList = new LinkedHashMap<Integer, String>();
@@ -151,9 +150,16 @@ public class ProductController {
 
 	@RequestMapping(value = "/getAllproducts", method = RequestMethod.GET)
 	public String display(Model m) {
-		List<Product> listProduct = productDao.retriveProduct();
-		m.addAttribute("productList", listProduct);
+		// List<Product> listProduct = productDao.retriveProduct();
+		// m.addAttribute("productList", listProduct);
 		return "product";
+	}
+
+	// browse all products including Angular JS
+	@RequestMapping(value = "/getProductsList")
+	public @ResponseBody List<Product> getProductsListInJSON() {
+		System.out.println("getProductsListInJSON called**************");
+		return productDao.retriveProduct();
 	}
 
 	// product Update method1
@@ -192,9 +198,7 @@ public class ProductController {
 		product.setCategory(category);
 		product.setSupplier(supplier);
 		productDao.updateProduct(product);
-		
 
-		
 		return "redirect:/getAllproducts";
 	}
 

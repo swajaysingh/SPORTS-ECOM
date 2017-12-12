@@ -8,6 +8,15 @@
 	<name>Sportsfrontend Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>com</groupId>
 			<artifactId>Sportsbackend</artifactId>
@@ -27,13 +36,13 @@
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
+			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
@@ -78,6 +87,7 @@
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.1.1</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>Sportsfrontend</finalName>

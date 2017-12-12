@@ -57,5 +57,6 @@ body { background:#dbdbdb url('http://cdn.dcodes.net/2/bg_images/color/c29.jpg')
 
 		</table>
 	</center>
+	
 </body>
 </html>

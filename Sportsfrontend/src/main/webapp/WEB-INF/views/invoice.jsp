@@ -1,102 +1,150 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="spr"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="header.jsp"%>
+<!DOCTYPE html>
 <html>
 <head>
- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/resources/registration.css ">
+<style>
+body {
+	padding-bottom: 100px;
+}
+</style>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
 
-<div class="container">
-<form action="/ack" class="form-horizontal">
-<fieldset>
-<div class="form-group">
-<label class="col-sm-4 control-label" for="username">Customer Name</label>
-<div class="col-sm-4">
-<label class="col-sm-4 control-label" for="username">${userDetails.name}</label>
-</div>
-</div>
+	<div class="container">
 
-<div class="form-group">
-<label class="col-sm-4 control-label" for="email">Customer Email</label>
-<div class="col-sm-4">
-<label class="col-sm-4 control-label" for="email">${userDetails.userMailId}</label>
-</div>
-</div>
+		<div class="jumbotron">
+			<h3>
+				<center>INVOICE</center>
+			</h3>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
 
-<div class="form-group">
-<label class="col-sm-4 control-label" for="address">Customer Address</label>
-<div class="col-sm-4">
-<label class="col-sm-4 control-label" for="address">${userDetails.address}</label>
-</div>
-</div>
+			<div class="panel panel-default">
+				<div class="panel-heading text-center">Customer Details</div>
 
-<div class="form-group">
-<label class="col-sm-4 control-label" for="deliverydate">Delivery Date</label>
-<div class="col-sm-4">
-<label class="col-sm-4 control-label" for="deliverydate">Within 7 working days.</label>
-</div>
-</div>
+				<div class="panel-body">
+					<table>
+						<tr>
+							<th>Customer Name:</th>
+						</tr>
+						<tr>
+							<td>${Customer.customerName}</td>
+						</tr>
 
-<div class = "container">
-<div class = "row">
+						<tr>
+							<th>Customer Email:</th>
+						</tr>
+						<tr>
+							<td>${Customer.customerEmail}</td>
+						</tr>
 
-<div class = "panel panel-default">
-<div class = "panel-heading text-center">ITEM(S)</div>
+						<tr>
+							<th>Shipping Address:</th>
+						<tr>
+							<td>Apartment:</td>
+							<td>${Customer.shippingAddress.apartmentNumber}</td>
+						</tr>
+						<tr>
+							<td>city:</td>
+							<td>${Customer.shippingAddress.city}</td>
+						</tr>
+						<tr>
+							<td>country:</td>
+							<td>${Customer.shippingAddress.country}</td>
+						</tr>
+						<tr>
+							<td>state:</td>
+							<td>${Customer.shippingAddress.state}</td>
+						</tr>
+						<tr>
+							<td>streetName:</td>
+							<td>${Customer.shippingAddress.streetName}</td>
+						</tr>
+						<tr>
+							<td>zipcode:</td>
+							<td>${Customer.shippingAddress.zipcode}</td>
+						</tr>
+						<tr>
+							<th>Delivery within 7 working days</th>
 
-<div class = "panel-body">
-<table class="table table-striped">
-<tr>
-<th>Items Ordered</th>
-<th>QTY.</th>
-<th>PRICE</th>
-</tr>
-<c:set var = "gtotal" value = "0"></c:set>
-<c:forEach items = "${ Cart}" var = "c">
-<tr><td>
-${c.cartProdName}
-</td>
-<td>${c.cartQnty}.PC(S)</td>
-<td>${c.cartPrice}</td>
-<c:set var = "gtotal" value = "${gtotal + c.cartPrice + c.cartQnty}"></c:set>
-</tr>
-</c:forEach>
-<tr><th>GRAND TOTAL</th>
-<td>&nbsp;</td>
-<th>${gtotal}</th>
-</tr>
+						</tr>
+					</table>
 
-</table>
-</div>
-</div>
-</div>
-</div>
+				</div>
+			</div>
 
-<div class="form-group">
-<label class="col-sm-4 control-label" for="submit"></label>
-<div class="col-sm-4">
-<button type="submit" name="checkoutclick" class="btn btn-lg">Place Order</button>
-</div>
-</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
 
+			<div class="panel panel-default">
+				<div class="panel-heading text-center">Payment Information</div>
 
+				<div class="panel-body">
+					<table>
+						<tr>
+							<th>Payment Method:</th>
+						</tr>
+						<tr>
+							<td>${orderList.payment}</td>
+						</tr>
 
-</fieldset>
+						<tr>
+							<th>Billing Address:</th>
+						</tr>
+						<tr>
+							<td>Apartment:</td>
+							<td>${Customer.billingAddress.apartmentNumber}</td>
+						</tr>
+						<tr>
+							<td>city:</td>
+							<td>${Customer.billingAddress.city}</td>
+						</tr>
+						<tr>
+							<td>country:</td>
+							<td>${Customer.billingAddress.country}</td>
+						</tr>
+						<tr>
+							<td>state:</td>
+							<td>${Customer.billingAddress.state}</td>
+						</tr>
+						<tr>
+							<td>streetName:</td>
+							<td>${Customer.billingAddress.streetName}</td>
+						</tr>
+						<tr>
+							<td>zipcode:</td>
+							<td>${Customer.billingAddress.zipcode}</td>
+						</tr>
+					</table>
 
-</form>
+				</div>
+			</div>
 
-</div>
+		</div>
+	</div>
 
+	<div class="container text-center">
+		<a href="ackOrder"><button class="btn-primary">CONFIRM
+				ORDER</button></a>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
+<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </html>

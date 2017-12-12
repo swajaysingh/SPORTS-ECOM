@@ -37,8 +37,8 @@
 		<security:authentication-provider>
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
-				users-by-username-query="select email,password, 'TRUE' as enabled from User where email=?"
-				authorities-by-username-query="select email,role from User where email=?" />
+				users-by-username-query="select userName,password, 'TRUE' as enabled from User where userName=?"
+				authorities-by-username-query="select userName,role from User where userName=?" />
 
 		</security:authentication-provider>
 	</security:authentication-manager>

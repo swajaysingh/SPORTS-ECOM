@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.DAO.CustomerDao;
 import com.DAO.UserDao;
+import com.model.BillingAddress;
+import com.model.Customer;
+import com.model.ShippingAddress;
 import com.model.User;
 
 @Controller
@@ -20,6 +24,11 @@ public class UserController {
 
 	@Autowired
 	UserDao userDao;
+
+	@Autowired
+	CustomerDao cdao;
+
+	// oldcode
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView goToRegister() {
@@ -32,12 +41,12 @@ public class UserController {
 
 	@RequestMapping(value = "saveRegister", method = RequestMethod.POST)
 	public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
-		
+
 		if (result.hasErrors())
 			return "register";
-		
+
 		user.setRole("ROLE_USER");
-		user.setEnabled("enabled");
+		user.setEnabled(true);
 		userDao.insertUser(user);
 		// mav.setViewName("index");
 		return "login";
@@ -56,8 +65,21 @@ public class UserController {
 
 	@RequestMapping("/home")
 	public String home() {
-
 		return "home";
+
+	}
+
+	@RequestMapping("/")
+	public String slas() {
+
+		return "index";
+
+	}
+
+	@RequestMapping("/index")
+	public String indexpage() {
+
+		return "index";
 
 	}
 }

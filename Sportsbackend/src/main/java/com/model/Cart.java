@@ -1,6 +1,7 @@
 package com.model;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,23 +15,31 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
+@Table(name = "cart")
 public class Cart implements Serializable {
-	private static final long serialVersionUID = 1L;
-    
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cartId;
-	private int cartProductId;
-	@JoinColumn(name="email")
-	@OneToOne(fetch=FetchType.LAZY)
-	private User cartUserDetails;
-	private String cartProdName;
-	private Double cartPrice;
-	private int cartQnty;
-	private String cartImg;
-	
+
+	private double grandTotal;
+
+	@OneToOne
+	@JoinColumn(name = "userId")
+	@JsonIgnore
+	private Customer customer;
+
+	// not there in the database but there here
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<CartItem> cartItems;
+
+	// default constructor
+	public Cart() {
+
+	}
+
 	public int getCartId() {
 		return cartId;
 	}
@@ -39,69 +48,29 @@ public class Cart implements Serializable {
 		this.cartId = cartId;
 	}
 
-	public int getCartProductId() {
-		return cartProductId;
+	public double getGrandTotal() {
+		return grandTotal;
 	}
 
-	public void setCartProductId(int cartProductId) {
-		this.cartProductId = cartProductId;
+	public void setGrandTotal(double grandTotal) {
+		this.grandTotal = grandTotal;
 	}
 
-	public User getCartUserDetails() {
-		return cartUserDetails;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCartUserDetails(User cartUserDetails) {
-		this.cartUserDetails = cartUserDetails;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public String getCartProdName() {
-		return cartProdName;
+	public List<CartItem> getCartItems() {
+		return cartItems;
 	}
 
-	public void setCartProdName(String cartProdName) {
-		this.cartProdName = cartProdName;
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
 	}
-
-	public Double getCartPrice() {
-		return cartPrice;
-	}
-
-	public void setCartPrice(Double cartPrice) {
-		this.cartPrice = cartPrice;
-	}
-
-	public int getCartQnty() {
-		return cartQnty;
-	}
-
-	public void setCartQnty(int cartQnty) {
-		this.cartQnty = cartQnty;
-	}
-
-	public String getCartImg() {
-		return cartImg;
-	}
-
-	public void setCartImg(String cartImg) {
-		this.cartImg = cartImg;
-	}
-
-	public Cart(int cartProductId,User cartUserDetails,Double cartPrice,int cartQnty)
-	{
-	
-		this.cartPrice= cartPrice;
-		this.cartProductId= cartProductId;
-		this.cartQnty=cartQnty;
-		this.cartUserDetails=cartUserDetails;
-		System.out.println("in params constructor");
-	}
-	public Cart()
-	{
-		super();
-		System.out.println("indefault constructor");
-	}	
-
 
 
 }

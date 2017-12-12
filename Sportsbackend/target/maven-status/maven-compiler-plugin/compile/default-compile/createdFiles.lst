@@ -1,12 +1,12 @@
+com\DAO\CartItemDao.class
 com\DAOImpl\SupplierDaoImpl.class
 com\model\Cart.class
-com\DAOImpl\OrdersDaoImpl.class
 com\model\Category.class
-com\model\Orders.class
 com\DAOImpl\ProductDaoImpl.class
 com\DAO\ProductDao.class
+com\DAOImpl\CartItemDaoImpl.class
 com\model\Product.class
-com\DAO\OrdersDao.class
+com\DAO\CustomerDao.class
 com\DAOImpl\CategoryDaoImpl.class
 com\DAO\CategoryDao.class
 com\model\Supplier.class
@@ -14,6 +14,11 @@ com\model\User.class
 com\DAOImpl\CartDaoImpl.class
 com\DAO\CartDao.class
 com\DAO\SupplierDao.class
+com\model\BillingAddress.class
 com\config\DBConfig.class
+com\model\Customer.class
+com\DAOImpl\CustomerDaoImpl.class
+com\model\CartItem.class
 com\DAO\UserDao.class
 com\DAOImpl\UserDaoImpl.class
+com\model\ShippingAddress.class

@@ -13,25 +13,27 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.model.BillingAddress;
 import com.model.Cart;
-
+import com.model.CartItem;
 import com.model.Category;
-import com.model.Orders;
+import com.model.Customer;
+
 import com.model.Product;
+import com.model.ShippingAddress;
 import com.model.Supplier;
 import com.model.User;
 
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("com")
-public class DBConfig 
-{
-	
+public class DBConfig {
+
 	@Bean("dataSource")
 	public DataSource getH2DataSource() {
 		DriverManagerDataSource driverMgrDataSource = new DriverManagerDataSource();
 		driverMgrDataSource.setDriverClassName("org.h2.Driver");
-		driverMgrDataSource.setUrl("jdbc:h2:tcp://localhost/~/abcd");
+		driverMgrDataSource.setUrl("jdbc:h2:tcp://localhost/~/BHAIYU1");
 		driverMgrDataSource.setUsername("sa");
 		driverMgrDataSource.setPassword("");
 		return driverMgrDataSource;
@@ -43,7 +45,7 @@ public class DBConfig
 		Properties hibernateProperties = new Properties();
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
 		hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-		hibernateProperties.put("hibernate.show_sql",true);
+		hibernateProperties.put("hibernate.show_sql", true);
 
 		LocalSessionFactoryBuilder localSessionFacBuilder = new LocalSessionFactoryBuilder(getH2DataSource());
 		localSessionFacBuilder.addProperties(hibernateProperties);
@@ -51,29 +53,22 @@ public class DBConfig
 		localSessionFacBuilder.addAnnotatedClass(Product.class);
 		localSessionFacBuilder.addAnnotatedClass(Supplier.class);
 		localSessionFacBuilder.addAnnotatedClass(Cart.class);
-		
-		localSessionFacBuilder.addAnnotatedClass(Orders.class);
+		localSessionFacBuilder.addAnnotatedClass(CartItem.class);
+		localSessionFacBuilder.addAnnotatedClass(Customer.class);
+		localSessionFacBuilder.addAnnotatedClass(BillingAddress.class);
+		localSessionFacBuilder.addAnnotatedClass(ShippingAddress.class);
 		localSessionFacBuilder.addAnnotatedClass(User.class);
-		
+
 		SessionFactory sessionFactory = localSessionFacBuilder.buildSessionFactory();
 		System.out.println("Session Factory Object Created");
 		System.out.println(sessionFactory);
 		return sessionFactory;
 	}
 
-	@Bean(name="hibernatetransactionmanager")
+	@Bean(name = "hibernatetransactionmanager")
 	public HibernateTransactionManager getHibernateTransactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager hibernateTranMgr = new HibernateTransactionManager(sessionFactory);
 		return hibernateTranMgr;
 	}
-/*	@Autowired
-	@Bean(name="ordersDaoImpl")
-	public OrdersDaoImpl getOrdersData(SessionFactory sessionFac)
-	{
-		return new OrdersDaoImpl(sessionFac);
-	}*/
-	
-	
-	
-	
+
 }

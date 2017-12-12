@@ -40,7 +40,7 @@ public class UserDaoImpl implements UserDao {
 		try {
 			transaction = session.getTransaction();
 			transaction.begin();
-			Query query = session.createQuery("from User where userMailId='" + userMailId + "'");
+			Query query = session.createQuery("from User where email='" + userMailId + "'");
 			user = (User) query.uniqueResult();
 			transaction.commit();
 		} catch (Exception e) {
@@ -55,12 +55,16 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public boolean authenticateUser(String userMailId, String userPassword) {
-		User user = getUserByUserId(userMailId);
+	/*	User user = getUserByUserId(userMailId);
 		if (user != null && user.getEmail().equals(userMailId) && user.getPassword().equals(userPassword)) {
 			return true;
 		} else {
 			return false;
 		}
+		
+	
+	*/
+		return false;
 	}
 
 }

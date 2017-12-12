@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+bg color dsajbjasbd**********
 <form:form action="AddProduct" modelAttribute="product" enctype="multipart/form-data">
 <table cellspacing="2" align="center">
 <tr bgcolor="gray">

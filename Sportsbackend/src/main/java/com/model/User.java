@@ -5,14 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-@Table
+@Table(name = "user")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -20,19 +20,21 @@ public class User implements Serializable {
 	@GeneratedValue
 	private int userId;
 
-	private Cart cart;
-	@NotEmpty(message = "email must Not be empty")
-	private String email;
-	@NotEmpty(message = "userName must Not be empty")
 	private String userName;
-	@NotEmpty(message = "userAddress must Not be empty")
-	private String userAddress;
-	@NotEmpty(message = "userContact must Not be empty")
-	private String userContact;
-	private String enabled;
-	@NotEmpty(message = "password must Not be empty")
+	
+	private boolean enabled;
+
+	
 	private String password;
+
 	private String role;
+
+	@OneToOne(mappedBy = "user")
+	private Customer customer;
+
+	public User() {
+
+	}
 
 	public int getUserId() {
 		return userId;
@@ -42,22 +44,7 @@ public class User implements Serializable {
 		this.userId = userId;
 	}
 
-	public Cart getCart() {
-		return cart;
-	}
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -66,29 +53,6 @@ public class User implements Serializable {
 		this.userName = userName;
 	}
 
-	public String getUserAddress() {
-		return userAddress;
-	}
-
-	public void setUserAddress(String userAddress) {
-		this.userAddress = userAddress;
-	}
-
-	public String getUserContact() {
-		return userContact;
-	}
-
-	public void setUserContact(String userContact) {
-		this.userContact = userContact;
-	}
-
-	public String getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(String enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getPassword() {
 		return password;
@@ -108,6 +72,22 @@ public class User implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	// gett+sett

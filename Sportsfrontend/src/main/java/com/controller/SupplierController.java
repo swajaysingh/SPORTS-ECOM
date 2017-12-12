@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.DAO.SupplierDao;
-import com.model.Category;
 import com.model.Supplier;
 
 @Controller

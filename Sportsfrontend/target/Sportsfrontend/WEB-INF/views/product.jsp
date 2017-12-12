@@ -13,6 +13,10 @@
 	href="http://cdn.dcodes.net/2/tables1/css/dc_tables1.css" />
 <link type="text/css" rel="stylesheet"
 	href="http://cdn.dcodes.net/2/tables1/css/dc_tables1.css" />
+
+<script src="<c:url value="/resources/js/controller.js"></c:url>"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <style type="text/css">
@@ -24,64 +28,113 @@ body {
 </style>
 </head>
 <body>
-	<center>
-		<h2>Manage Product</h2>
+	<div data-ng-app="myapp">
 
-		<security:authorize access="hasRole('ROLE_ADMIN')">
-
-			<a href="createProduct" class="btn btn-primary" role="button">Add
-				Product</a>
-		</security:authorize>
+		<div data-ng-controller="productController"
+			data-ng-init="getAllProducts()">
+			-->
 
 
-	</center>
+			<center>
+				<h2>Manage Product</h2>
 
-	<form:form action="AddProduct" modelAttribute="product"
-		enctype="multipart/form-data">
-		<center>
-			<table class="dc_table_s3" style="width: 80%">
-				<thead>
-					      
-					<tr>
-						       
-						<th scope="col">Product Id</th> 
-						<th scope="col">Product Name</th>
-						<th scope="col">Supplier Name</th>    
-						<th scope="col">Category Name</th>              
-						<th scope="col">Price</th>            
-						<th scope="col">Description</th>
-						<th scope="col">Stock</th>
-						<th scope="col">Photo</th>  
-						<!-- <th scope="col">Operations</th> 
+				<security:authorize access="hasRole('ROLE_ADMIN')">
+
+					<a href="createProduct" class="btn btn-primary" role="button">Add
+						Product</a>
+				</security:authorize>
+
+
+			</center>
+
+			<form:form action="AddProduct" modelAttribute="product"
+				enctype="multipart/form-data">
+				<center>
+					<table class="dc_table_s3" style="width: 80%">
+						<thead>
+							      
+							<tr>
+								       
+								<th scope="col">Product Id</th> 
+								<th scope="col">Product Name</th>
+								<th scope="col">Supplier Name</th>    
+								<th scope="col">Category Name</th>              
+								<th scope="col">Price</th>            
+								<th scope="col">Description</th>
+								<th scope="col">Stock</th>
+								<th scope="col">Photo</th>  
+								<!-- <th scope="col">Operations</th> 
  -->
-					</tr>
-					    
-				</thead>
-				<c:forEach items="${productList}" var="product">
-					<tr>
-						<td align="center"><a
-							href="getAllproducts/${product.productId}">${product.productId }</a></td>
+							</tr>
+							    
+						</thead>
+						<%-- <c:forEach items="${productList}" var="product">
+							<tr>
+								<td align="center"><a
+									href="getAllproducts/${product.productId}">${product.productId }</a></td>
 
-						<td align="center">${product.productName}</td>
-						<td align="center">${product.supplier.supplierName }</td>
-						<td align="center">${product.category.catName }</td>
-						<td align="center">${product.price}</td>
-						<td align="center">${product.productDesc }</td>
-						<td align="center">${product.stock }</td>
+								<td align="center">${product.productName}</td>
+								<td align="center">${product.supplier.supplierName }</td>
+								<td align="center">${product.category.catName }</td>
+								<td align="center">${product.price}</td>
+								<td align="center">${product.productDesc }</td>
+								<td align="center">${product.stock }</td>
 
-						<td align="center"><img width="100px" height="100px"
-							src="<c:url value="/resources/images/${product.productId}.jpg"/> " /></td>
+								<td align="center"><img width="100px" height="100px"
+									src="<c:url value="/resources/images/${product.productId}.jpg"/> " /></td>
 
-						<security:authorize access="hasRole('ROLE_ADMIN')">
-							<td><a
-								href="<c:url value="deleteProduct/${product.productId}"/>">DELETE</a>/
-								<a href="<c:url value="updateProduct/${product.productId}"/>">UPDATE</a>
-							</td>
-						</security:authorize>
-					</tr>
-				</c:forEach>
-			</table>
-	</form:form>
-	</center>
+								<security:authorize access="hasRole('ROLE_ADMIN')">
+									<td><a
+										href="<c:url value="deleteProduct/${product.productId}"/>">DELETE</a>/
+										<a href="<c:url value="updateProduct/${product.productId}"/>">UPDATE</a>
+									</td>
+								</security:authorize>
+							</tr>
+						</c:forEach> --%>
+
+
+						<tr data-ng-repeat="product in products | filter:searchCondition">
+
+
+
+
+
+							<td align="center"><a
+								href="getAllproducts/{{product.productId}}">{{product.productId }}</a></td>
+							<td align="center">{{product.productName}}</td>
+							<td align="center">{{product.supplier.supplierName}}</td>
+							<td align="center">{{product.category.catName}}</td>
+							<td align="center">{{product.price}}</td>
+							<td align="center">{{product.productDesc}}</td>
+							<td align="center">{{product.stock}}</td>
+
+							<td align="center"><img width="100px" height="100px"
+								src="<c:url value="/resources/images/{{product.productId}}.jpg"/> " /></td>
+
+
+
+							<td align="center"><security:authorize
+									access="hasRole('ROLE_ADMIN')">
+
+									<a href="<c:url value="/updateProduct/{{product.productId}}"/>">Edit
+										<span class="glyphicon glyphicon-edit"></span>
+									</a>| <a
+										href="<c:url value="/deleteProduct/{{product.productId}}"/>">
+										<span class="glyphicon glyphicon-trash"></span>delete
+									</a>
+
+								</security:authorize></td>
+
+
+						</tr>
+
+
+
+					</table>
+			</form:form>
+			<%-- </center> --%>
+		</div>
+	</div>
+	
 </body>
 </html>

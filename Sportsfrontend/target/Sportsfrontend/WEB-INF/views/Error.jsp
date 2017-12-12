@@ -8,5 +8,6 @@
 </head>
 <body>
 	login failed!!!!!
+	<%@ include file="footer.jsp"%>
 </body>
 </html>
